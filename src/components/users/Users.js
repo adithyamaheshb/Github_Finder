@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { UserItem } from './UserItem';
 import styled from 'styled-components';
+import Spinner from './../layout/Spinner';
+import PropTypes from 'prop-types';
 
 const UserStyle = styled.div`
     display: grid;
@@ -8,31 +10,11 @@ const UserStyle = styled.div`
     grid-gap: 1rem;
 `;
 
-export class Users extends Component {
-    state = {
-        users: [
-            {
-                id: 1,
-                login: 'octocat',
-                avatar_url: 'https://avatars1.githubusercontent.com/u/16808858?s=400&u=6a7778ced308a96d08e0e0d7865fc254fa4c40e0&v=4',
-                html_url: 'https://github.com/octocat'
-            },
-            {
-                id: 2,
-                login: 'octocat',
-                avatar_url: 'https://avatars1.githubusercontent.com/u/16808858?s=400&u=6a7778ced308a96d08e0e0d7865fc254fa4c40e0&v=4',
-                html_url: 'https://github.com/octocat'
-            },
-            {
-                id: 3,
-                login: 'octocat',
-                avatar_url: 'https://avatars1.githubusercontent.com/u/16808858?s=400&u=6a7778ced308a96d08e0e0d7865fc254fa4c40e0&v=4',
-                html_url: 'https://github.com/octocat'
-            }
-        ]
+const Users = ({ users, loading }) => {
+    if(loading) {
+        return <Spinner />
     }
-    render() {
-        const { users } = this.props;
+    else {
         return (
             <UserStyle>
                 {users.map((user, index) => {
@@ -43,6 +25,9 @@ export class Users extends Component {
     }
 }
 
-
+Users.propTypes = {
+    users: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired
+}
 
 export default Users
