@@ -18,6 +18,16 @@ const App = () =>  {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
 
+  useEffect(() => {
+    async function fetchUsers() {
+      setLoading(true);
+      let res = await axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+      setUsers(res.data);
+      setLoading(false);
+    }
+    fetchUsers();
+  }, [])
+
   // //Loading Users on mounting
   // async componentDidMount() {
   //   this.setState({ loading: true });
