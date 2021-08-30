@@ -1,13 +1,18 @@
-import React from 'react'
-import { isNullOrUndefined } from 'util';
+import React, { useContext } from "react";
+import AlertContext from "../../context/alert/alertContext";
 
-const Alert = ({ alert }) => {
-    if(!isNullOrUndefined(alert)) {
-        return <div className={`alert alert-${alert.type}`}>
-                <i className="fa fa-info-circle"></i> {alert.msg}
-            </div>
-        }
-    return null
-}
+const Alert = () => {
+  const alertContext = useContext(AlertContext);
 
-export default Alert
+  const { alert } = alertContext;
+  if (alert !== null) {
+    return (
+      <div className={`alert alert-${alert.type}`}>
+        <i className="fa fa-info-circle"></i> {alert.msg}
+      </div>
+    );
+  }
+  return null;
+};
+
+export default Alert;
